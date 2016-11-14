@@ -55,9 +55,9 @@ func main() {
 	var err error
 
 	// Defines the HTTP Request
-	// send a GET to the NUTANIX API and gets the cluster details
-	// https://192.168.178.130:9440/PrismGateway/services/rest/v1/cluster/
-	req, err = http.NewRequest("GET", v1_0("192.168.178.130")+"/cluster", nil)
+	// send a GET to the NUTANIX API and receives the user session_info
+	// https://192.168.178.130:9440/PrismGateway/services/rest/v1//users/session_info
+	req, err = http.NewRequest("GET", v1_0("192.168.178.130")+"/users/session_info", nil)
 
 	// before the request is send set the HTTP Header key "Authorization" with
 	// the value of base64 encoded Username and Password
@@ -84,19 +84,10 @@ func main() {
 		os.Exit(1)
 	}
 
-	//
-	//htmlData, err := ioutil.ReadAll(resp.Body)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	os.Exit(1)
-	//}
-
-	//fmt.Println(string(htmlData))
-
-	// Defines the HTTP Request
-	// send a GET to the NUTANIX API and gets the cluster details
-	// https://192.168.178.130:9440/PrismGateway/services/rest/v1/cluster/
-	req, err = http.NewRequest("GET", v1_0("192.168.178.130")+"/vms", nil)
+	// Defines the 2. HTTP Request without setting the "Authorization" header
+	// send a GET to the NUTANIX API and receives the user session_info
+	// https://192.168.178.130:9440/PrismGateway/services/rest/v1/users/session_info
+	req, err = http.NewRequest("GET", v1_0("192.168.178.130")+"/users/session_info", nil)
 
 	resp, err = httpClient.Do(req)
 	if err != nil {

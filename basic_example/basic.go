@@ -52,7 +52,7 @@ func main() {
 	var err error
 
 	// Defines the HTTP Request
-	// send a GET to the NUTANIX API and gets the cluster details
+	// send a GET to the NUTANIX API and receives the user session_info
 	// https://192.168.178.130:9440/PrismGateway/services/rest/v1//users/session_info
 	req, err = http.NewRequest("GET", v1_0("192.168.178.130")+"/users/session_info", nil)
 

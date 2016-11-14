@@ -53,7 +53,7 @@ func main() {
 
 	// Defines the HTTP Request
 	// send a GET to the NUTANIX API and gets the cluster details
-	// https://192.168.178.130:9440/PrismGateway/services/rest/v1/cluster/
+	// https://192.168.178.130:9440/PrismGateway/services/rest/v1//users/session_info
 	req, err = http.NewRequest("GET", v1_0("192.168.178.130")+"/users/session_info", nil)
 
 	// before the request is send set the HTTP Header key "Authorization" with
@@ -81,13 +81,14 @@ func main() {
 		os.Exit(1)
 	}
 
-	//
+	// read the data from the resp.body into htmlData
 	htmlData, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
+	// print the response body (htmlData) to give you a feedback
 	fmt.Println(string(htmlData))
 
 }

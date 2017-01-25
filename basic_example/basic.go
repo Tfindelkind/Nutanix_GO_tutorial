@@ -30,6 +30,20 @@ func v1_0(NutanixHost string) string {
 
 }
 
+// v2_0 returns the main entry point for the v2.0 Nutanix API
+func v2_0(NutanixHost string) string {
+
+	return "https://" + NutanixHost + ":9440/PrismGateway/services/rest/v2.0/"
+
+}
+
+// v3_0 returns the main entry point for the v3.0 Nutanix API -> Not GA with AOS 5.0
+func v3_0(NutanixHost string) string {
+
+	return "https://" + NutanixHost + ":9440/PrismGateway/services/rest/v3.0/"
+
+}
+
 func main() {
 
 	// PRISM user
@@ -37,7 +51,7 @@ func main() {
 	// PRISM user password
 	var password = "nutanix/4u"
 	// Nutanix Cluster IP/DNSName CVM IP/DNSName
-	var NutanixHost = "192.168.178.130"
+	var NutanixHost = "192.168.178.70"
 
 	// Ignores certificates which can not be validated
 	tr := &http.Transport{
@@ -53,8 +67,8 @@ func main() {
 
 	// Defines the HTTP Request
 	// send a GET to the NUTANIX API and receives the user session_info
-	// https://192.168.178.130:9440/PrismGateway/services/rest/v1//users/session_info
-	req, err = http.NewRequest("GET", v1_0("192.168.178.130")+"/users/session_info", nil)
+	// https://NutanixHost:9440/PrismGateway/services/rest/v1//users/session_info
+	req, _ = http.NewRequest("GET", v1_0(NutanixHost)+"/users/session_info", nil)
 
 	// before the request is send set the HTTP Header key "Authorization" with
 	// the value of base64 encoded Username and Password

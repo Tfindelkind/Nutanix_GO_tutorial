@@ -247,6 +247,20 @@ func v1_0(NutanixHost string) string {
 
 }
 
+// v2_0 returns the main entry point for the v2.0 Nutanix API
+func v2_0(NutanixHost string) string {
+
+	return "https://" + NutanixHost + ":9440/PrismGateway/services/rest/v2.0/"
+
+}
+
+// v3_0 returns the main entry point for the v3.0 Nutanix API -> Not GA with AOS 5.0
+func v3_0(NutanixHost string) string {
+
+	return "https://" + NutanixHost + ":9440/PrismGateway/services/rest/v3.0/"
+
+}
+
 func main() {
 
 	// PRISM user
@@ -271,7 +285,7 @@ func main() {
 	// Defines the HTTP Request
 	// send a GET to the NUTANIX API and receives the cluster info
 	// https://192.168.178.130:9440/PrismGateway/services/rest/v1/clusters
-	req, err = http.NewRequest("GET", v1_0(NutanixHost)+"/clusters", nil)
+	req, _ = http.NewRequest("GET", v1_0(NutanixHost)+"/clusters", nil)
 
 	// before the request is send set the HTTP Header key "Authorization" with
 	// the value of base64 encoded Username and Password
